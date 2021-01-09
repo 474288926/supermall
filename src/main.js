@@ -5,14 +5,18 @@ import store from './store'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
+import FastClick from 'fastclick'
+
+// import VueLazyLoad from 'vue-lazyload'
+
+import toast from './components/common/toast'
+
+import 'normalize.css/normalize.css'
+
 import {request} from './network/request.js'
 
-createApp(App).use(store).use(router).use(VueAxios, axios).mount('#app')
+FastClick.attach(document.body)
 
-request({
-	url: 'home/multidata'
-}).then(res => {
-	console.log(res);
-}).catch(err => {
-	console.log(err);
-})
+
+createApp(App).use(store).use(router).use(VueAxios, axios).use(toast).mount('#app')
+

@@ -1,32 +1,23 @@
 <template>
   <div id="app">
-      <router-view></router-view>
-      <main-tab-bar></main-tab-bar>	
-      <button @click="increment">点击</button>
-      <h1>{{$store.state.count}}</h1>
-      <h2>{{onc}}</h2>
+      <router-view v-slot={Component}>
+          <keep-alive exclude="Detail">
+              <component :is="Component" />
+          </keep-alive>
+      </router-view>
+ 
+      <main-tab-bar v-show="$route.meta.showFooter" />
   </div>
 </template>
 
 <script>
-	import MainTabBar from './components/MainTabBar'
+	import MainTabBar from './components/content/maintabbar/MainTabBar'
 
 	export default {
 		name: 'App',
-           data(){
-              return {
-                onc: this.$store.state.count
-              }
-           },
 		components: {
 			MainTabBar
-		},
-          methods: {
-                increment() {
-                  this.$store.commit('increment')
-                  console.log(this.$store.state.count)
-                }
-              }
+		}
 	}
 </script>
 
